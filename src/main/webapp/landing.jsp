@@ -21,8 +21,11 @@
 <%
 	if(user!=null){
 		%>
-		<p> Hello, ${fn:escapeXml(user.getNickname())}! You are logged in. 
-		<a href="<%=userService.createLogoutURL(request.getRequestURI())%>">Logout</a></p>
+		<p> 
+			Hello, ${fn:escapeXml(user.getNickname())}! You are logged in. 
+			<a href="<%=userService.createLogoutURL(request.getRequestURI())%>">Logout</a>
+			<a href="/createPost.jsp">Click here to create a Post</a>
+		</p>
 		<%		
 	}
 	else{

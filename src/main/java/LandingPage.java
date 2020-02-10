@@ -12,4 +12,12 @@ public class LandingPage extends HttpServlet{
 	throws IOException{
 		resp.sendRedirect("/landing.jsp");
 	}
+	
+	public void doPost(HttpServletRequest req, HttpServletResponse resp) 
+	throws IOException{
+		String title = req.getParameter("title");
+		String content = req.getParameter("content");
+		resp.getWriter().write("<p>" + title + "</p>");
+		resp.getWriter().write("<p>" + title + "</p>");
+	}
 }
