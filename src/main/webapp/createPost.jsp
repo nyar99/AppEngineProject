@@ -8,5 +8,6 @@
 			<div><textarea name="content" rows="3" cols="60"></textarea></div>
 			<div><input type="submit" value="Post Greeting" ></div>
 		</form>
+		<a href="/landing.jsp">Cancel Post</a>
 	</body>
 </html>
