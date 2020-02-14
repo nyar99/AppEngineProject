@@ -4,7 +4,7 @@ import javax.servlet.http.*;
 
 @WebServlet(
 	    name = "posting",
-	    urlPatterns = {"/posting"}
+	    urlPatterns = {"/post"}
 	)
 
 public class posting extends HttpServlet{
