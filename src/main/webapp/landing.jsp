@@ -36,10 +36,12 @@
 
 	if(user!=null){
 		%>
+		<a href="subscribe.jsp"></a>
 		<p> 
 			<a href="/createPost.jsp">Click here to create a Post</a>
 		
 			<a href="<%=userService.createLogoutURL(request.getRequestURI())%>">Logout</a>
+			
 		</p>
 		<%		
 	}
@@ -48,7 +50,10 @@
 		<a href='/login'>Login</a>
 		<%
 	}
+
 %>
+	
+
 <% 
 	DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     Key postsKey = KeyFactory.createKey("Blogpost", "default");
