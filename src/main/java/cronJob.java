@@ -1,4 +1,6 @@
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 import javax.mail.Message;
 import javax.mail.Session;
@@ -28,8 +30,20 @@ public class cronJob extends HttpServlet{
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 	    Key postsKey = KeyFactory.createKey("Blogpost", "default");
 	    Query query = new Query("email", postsKey);
+	    Query otherQuery = new Query("post",postsKey);
+	    List<Entity> recipes = datastore.prepare(otherQuery).asList(FetchOptions.Builder.withDefaults());
 	    List<Entity> emails = datastore.prepare(query).asList(FetchOptions.Builder.withDefaults());
-		
+	    String dailySummary = "";
+		for(Entity recipe : recipes) {
+			Date date = new Date();
+			LocalDateTime localDate = LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
+			Date recipeCreated = (Date) recipe.getProperty("date");
+			LocalDateTime localRecipeCreated = LocalDateTime.ofInstant(recipeCreated.toInstant(), ZoneId.systemDefault());
+			long diffInHours = java.time.Duration.between(localDate, localRecipeCreated).toHours();
+			if(diffInHours < 24) {
+				dailySummary+=recipe.getProperty("title") + "\n" + recipe.getProperty("content") + "\n";
+			}
+		}
 		
 		Properties props = new Properties();
 		Session session = Session.getDefaultInstance(props, null);
@@ -39,26 +53,14 @@ public class cronJob extends HttpServlet{
 				Message msg = new MimeMessage(session);
 				msg.setFrom(new InternetAddress("nyar99@gmail.com"));
 				msg.addRecipient(Message.RecipientType.TO, new InternetAddress((String)e.getProperty("email")));
-				msg.setSubject("title");
-				msg.setText("test");
+				msg.setSubject("Naveen and Chris' Cooking Blog's Daily Summary");
+				msg.setText(dailySummary);
 				Transport.send(msg);
 			}
 			catch(Exception ex) {
 				ex.printStackTrace();
 			}
-		}
-		
-		/*
-		String from = "nyar99@gmail.com";
-		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-	    Key postsKey = KeyFactory.createKey("Blogpost", "default");
-	    Query query = new Query("email", postsKey);
-	    List<Entity> emails = datastore.prepare(query).asList(FetchOptions.Builder.withDefaults());
-	   	for(Entity e : emails){
-	   		
-	   	}
-	   	*/
-	   		
+		}	   		
 	}
 
 }
