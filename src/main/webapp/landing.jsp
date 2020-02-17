@@ -36,7 +36,7 @@
 
 	if(user!=null){
 		%>
-		<a href="subscribe.jsp"></a>
+		<a href="subscribe.jsp">Subscribe</a>
 		<p> 
 			<a href="/createPost.jsp">Click here to create a Post</a>
 		

@@ -20,7 +20,7 @@
 	DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     Key postsKey = KeyFactory.createKey("Blogpost", "default");
     Date d = new Date();
-    Entity e = new Entity("post", postsKey);
+    Entity e = new Entity("email", postsKey);
     e.setProperty("email",email);
     e.setProperty("date", d);
 	datastore.put(e);
