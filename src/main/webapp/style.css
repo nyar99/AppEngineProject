@@ -1,0 +1,17 @@
+@charset "UTF-8";
+body{
+	background-color: beige;
+}
+img{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+h1{
+	text-align: center;
+}
+hr{
+	border: 2px solid black;
+	width: 40%;
+}
+

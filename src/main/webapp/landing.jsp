@@ -20,18 +20,19 @@
 %>
 
 <html>
+<head><link rel = "stylesheet" type="text/css" href="style.css"></head>
+
   <body>
-<h1>Chris and Naveen's Cooking Blog</h1>
-<%
+	<h1>Chris and Naveen's Cooking Blog</h1>
+	<%
 
 	if(user!=null){
 		%>
 		
-		<a href="/unsubscribe.jsp">Unsubscribe</a>
+		<a href="/unsubscribe.jsp" class = "link">Unsubscribe</a>
 		<a href="/subscribe.jsp">Subscribe</a>
 		<p> 
-			<a href="/createPost.jsp">Click here to create a Post</a>
-		
+			<div style = "text-align:center"><a href="/createPost.jsp">Post a Recipe!</a></div>
 			<a href="<%=userService.createLogoutURL(request.getRequestURI())%>">Logout</a>
 			
 		</p>
@@ -39,7 +40,7 @@
 	}
 	else{
 		%>
-		<a href='/login'>Login</a>
+		<div style = "top:50px; right:50px"><a href='/login'>Login</a></div>
 		<%
 	}
 
@@ -56,16 +57,25 @@
    		pageContext.setAttribute("recipe", r.getProperty("title"));
    		pageContext.setAttribute("instructions", r.getProperty("content"));
    		%>
-   		<blockquote>${recipe}</blockquote>
-   		<p>${instructions}<p>
+   		<br>
+   		<div style="text-align: center; border-style: inset; background-color: white; border-radius:25px">
+	   		<h3>${recipe}</h3>
+	   		<p>${instructions}</p>
+   		</div>
+   		<br>
    		<% if(r.getProperty("image")!=null){
    			pageContext.setAttribute("image",r.getProperty("image"));
-   			%> <img src=${image}> <%
+   			%> 
+   			<div><img src=${image}></div> <%
    		} %>
+   		<br>
+   		<hr>
    		<%
    	}
  %>
- 	<a href='allfiles.jsp'>Click here to view all recipes</a>
+ 	<br>
+ 	<br>
+ 	<div style="text-align: center"><a href='allfiles.jsp'>View All Recipes</a></div>
   </body>
 
 </html>

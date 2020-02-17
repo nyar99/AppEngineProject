@@ -53,7 +53,7 @@ public class cronJob extends HttpServlet{
 				Message msg = new MimeMessage(session);
 				msg.setFrom(new InternetAddress("nyar99@gmail.com"));
 				msg.addRecipient(Message.RecipientType.TO, new InternetAddress((String)e.getProperty("email")));
-				msg.setSubject("Naveen and Chris' Cooking Blog's Daily Summary");
+				msg.setSubject("Chris and Naveen's Cooking Blog Daily Summary");
 				msg.setText(dailySummary);
 				Transport.send(msg);
 			}
