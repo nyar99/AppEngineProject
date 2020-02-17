@@ -60,7 +60,7 @@
    		<p>${instructions}<p>
    		<% if(r.getProperty("image")!=null){
    			pageContext.setAttribute("image",r.getProperty("image"));
-   			%> <img src=${image}}> <%
+   			%> <img src=${image}> <%
    		} %>
    		<%
    	}

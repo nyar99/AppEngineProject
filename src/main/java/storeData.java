@@ -38,7 +38,7 @@ public class storeData extends HttpServlet{
 		post.setProperty("date", date);
 		Map<String, List<BlobKey>> blobs = blobstoreService.getUploads(req);
         List<BlobKey> blobKeys = blobs.get("food");
-        if(!blobKeys.isEmpty()) {
+        if(blobKeys!=null && !blobKeys.isEmpty()) {
         	ServingUrlOptions servingUrlOptions = ServingUrlOptions.Builder.withBlobKey(blobKeys.get(0));
         	String image_url = imageService.getServingUrl(servingUrlOptions);
         	post.setProperty("image", image_url);
