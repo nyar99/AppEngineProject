@@ -28,7 +28,7 @@
    		<%
    	}
  %>
- 	<a href="/landing.jsp">Click here to return to the main page</a>
+ 	<a href="/landing.jsp">Return to the main page</a>
   </body>
 
 </html>

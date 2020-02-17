@@ -56,11 +56,13 @@
    		pageContext.setAttribute("r",r);
    		pageContext.setAttribute("recipe", r.getProperty("title"));
    		pageContext.setAttribute("instructions", r.getProperty("content"));
-   		%>		
-   		<div style="text-align: center">
+   		%>
+   		<br>
+   		<div style="text-align: center; border-style: inset; background-color: white; border-radius:25px">
 	   		<h3>${recipe}</h3>
 	   		<p>${instructions}</p>
    		</div>
+   		<br>
    		<% if(r.getProperty("image")!=null){
    			pageContext.setAttribute("image",r.getProperty("image"));
    			%> 
