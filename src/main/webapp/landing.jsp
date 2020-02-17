@@ -28,19 +28,20 @@
 
 	if(user!=null){
 		%>
-		
-		<a href="/unsubscribe.jsp" class = "link">Unsubscribe</a>
-		<a href="/subscribe.jsp">Subscribe</a>
-		<p> 
-			<div style = "text-align:center"><a href="/createPost.jsp">Post a Recipe!</a></div>
-			<a href="<%=userService.createLogoutURL(request.getRequestURI())%>">Logout</a>
-			
-		</p>
+		<div class="button-container">
+			<a class="button" href="/subscribe.jsp">Subscribe</a>
+			<a class="button" href="/unsubscribe.jsp" class = "link">Unsubscribe</a>
+			<a class="button" href="<%=userService.createLogoutURL(request.getRequestURI())%>">Logout</a>
+		</div>
+		<br>
+		<div class="button-container"><a class="button" href="/createPost.jsp">Post a Recipe!</a></div>
 		<%		
 	}
 	else{
 		%>
-		<div style = "top:50px; right:50px"><a href='/login'>Login</a></div>
+		<div class="button-container">
+			<a class="button" href='/login'>Login</a>
+		</div>
 		<%
 	}
 
@@ -55,21 +56,49 @@
    	for(Entity r : recipes){
    		pageContext.setAttribute("r",r);
    		pageContext.setAttribute("recipe", r.getProperty("title"));
-   		pageContext.setAttribute("instructions", r.getProperty("content"));
+   		pageContext.setAttribute("date",r.getProperty("date"));
+   		pageContext.setAttribute("author",r.getProperty("user"));
+   		//pageContext.setAttribute("instructions", r.getProperty("content"));
    		%>
    		<br>
-   		<div style="text-align: center; border-style: inset; background-color: white; border-radius:25px">
-	   		<h3>${recipe}</h3>
-	   		<p>${instructions}</p>
+   		<div class="post-styling">
+			<h3>${recipe}</h3>
+			<span>Posted on ${date} by ${author}</span>
+			<hr style="width:50%;">
+			<div class="flex-parent">
+				<div class="ingredients">
+					<ul><%String[] lines2 = ((String)r.getProperty("ingredients")).split("\n"); 
+						for (String line : lines2){
+							if(line.length() >=2){
+								pageContext.setAttribute("line",line);
+								%>
+								<li style="text-align:left;"> ${line} </li>
+								<%
+							}
+						}
+					%></ul>
+				</div>
+				<% if(r.getProperty("image")!=null){
+						pageContext.setAttribute("image",r.getProperty("image"));
+						%> 
+						<div class="img-container"><img src=${image}></div> <%
+					} %>
+			</div>
+			<div>
+			<ol><%String[] lines = ((String)r.getProperty("content")).split("\n"); 
+				for (String line : lines){
+					if(line.length() >=2){
+						pageContext.setAttribute("line",line);
+						%>
+						<li style="text-align:left;"> ${line} </li>
+						<%
+					}
+				}
+			
+			%></ol>
+			</div>
    		</div>
-   		<br>
-   		<% if(r.getProperty("image")!=null){
-   			pageContext.setAttribute("image",r.getProperty("image"));
-   			%> 
-   			<div><img src=${image}></div> <%
-   		} %>
-   		<br>
-   		<hr>
+   		<hr class="separator">
    		<%
    	}
  %>

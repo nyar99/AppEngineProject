@@ -3,15 +3,52 @@ body{
 	background-color: beige;
 }
 img{
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
+	display: block-inline;
 }
 h1{
 	text-align: center;
 }
-hr{
+.separator{
 	border: 2px solid black;
 	width: 40%;
 }
 
+.post-styling{
+	 text-align: center;
+	 border-style: inset;
+	 background-color: white;
+	 border-radius:25px;
+	 width:60%;
+	 left:20%;
+	 position:relative;
+}
+
+.button-container{
+	text-align:center;
+}
+
+.button{
+	 background-color: #FFF; /* Green */
+	 border: 1px solid black;
+	 color: black;
+	 padding: 15px 32px;
+	 text-align: center;
+	 text-decoration: none;
+	 display: inline-block;
+	 font-size: 16px;
+	 border-radius:10px;
+}
+
+.flex-parent{
+	display:flex;
+}
+
+.img-container{
+	width:50%;
+	flex:1;
+}
+
+.ingredients{
+	width:30%;
+	flex: 1;
+}

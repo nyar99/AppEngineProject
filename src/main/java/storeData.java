@@ -1,4 +1,6 @@
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +18,9 @@ import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.images.ImagesService;
 import com.google.appengine.api.images.ImagesServiceFactory;
 import com.google.appengine.api.images.ServingUrlOptions;
+import com.google.appengine.api.users.User;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 
 @WebServlet(
 	    name = "storeData",
@@ -28,14 +33,22 @@ public class storeData extends HttpServlet{
     private ImagesService imageService = ImagesServiceFactory.getImagesService();
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
 	throws ServletException,IOException{
+		UserService userService = UserServiceFactory.getUserService();
+		User user = userService.getCurrentUser();
+		String userNickname = user.getNickname();
 		String title=req.getParameter("title");
+		String ingredients=req.getParameter("ingredients");
 		String content=req.getParameter("content");
 		Date date = new Date();
+		SimpleDateFormat format = new SimpleDateFormat("MMMM dd");
+		String strDate = format.format(date);
 		Key postKey = KeyFactory.createKey("Blogpost","default");
 		Entity post = new Entity("post",postKey);
+		post.setProperty("user", userNickname);
 		post.setProperty("title", title);
+		post.setProperty("ingredients",ingredients);
 		post.setProperty("content", content);
-		post.setProperty("date", date);
+		post.setProperty("date", strDate);
 		Map<String, List<BlobKey>> blobs = blobstoreService.getUploads(req);
         List<BlobKey> blobKeys = blobs.get("food");
         if(blobKeys!=null && !blobKeys.isEmpty()) {

@@ -8,6 +8,7 @@
 	<body>
 		<form action="<%= blobstoreService.createUploadUrl("/store")%>" method="post" enctype="multipart/form-data">
 			<div><textarea name="title" rows="1" cols="60"></textarea></div>
+			<div><textarea name="ingredients" rows="1" cols="60"></textarea></div>
 			<div><textarea name="content" rows="3" cols="60"></textarea></div>
 			<div><input type="file" name="food"></div>
 			<div><input type="submit" value="Post Recipe" ></div>
