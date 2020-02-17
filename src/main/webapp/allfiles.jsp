@@ -17,12 +17,17 @@
     Query query = new Query("post", postsKey).addSort("date", Query.SortDirection.DESCENDING);
     List<Entity> recipes = datastore.prepare(query).asList(FetchOptions.Builder.withDefaults());
    	for(Entity r : recipes){
+   		pageContext.setAttribute("r",r);
    		pageContext.setAttribute("recipe", r.getProperty("title"));
    		pageContext.setAttribute("instructions", r.getProperty("content"));
    		%>
    		<div>
 	   		<h3>${recipe}</h3>
 	   		<p>${instructions}</p>
+	   		<% if(r.getProperty("image")!=null){
+   			pageContext.setAttribute("image",r.getProperty("image"));
+   			%> <img src=${image}> <%
+   		} %>
    		</div>
    		<%
    	}
