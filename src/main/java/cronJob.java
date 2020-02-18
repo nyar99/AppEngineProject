@@ -37,7 +37,7 @@ public class cronJob extends HttpServlet{
 		for(Entity recipe : recipes) {
 			Date date = new Date();
 			LocalDateTime localDate = LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
-			Date recipeCreated = (Date) recipe.getProperty("date");
+			Date recipeCreated = (Date) recipe.getProperty("datedate");
 			LocalDateTime localRecipeCreated = LocalDateTime.ofInstant(recipeCreated.toInstant(), ZoneId.systemDefault());
 			long diffInHours = java.time.Duration.between(localDate, localRecipeCreated).toHours();
 			if(diffInHours < 24) {

@@ -48,6 +48,7 @@ public class storeData extends HttpServlet{
 		post.setProperty("title", title);
 		post.setProperty("ingredients",ingredients);
 		post.setProperty("content", content);
+		post.setProperty("datedate", date);
 		post.setProperty("date", strDate);
 		Map<String, List<BlobKey>> blobs = blobstoreService.getUploads(req);
         List<BlobKey> blobKeys = blobs.get("food");
