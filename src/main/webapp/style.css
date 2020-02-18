@@ -2,9 +2,6 @@
 body{
 	background-color: beige;
 }
-img{
-	display: block-inline;
-}
 h1{
 	text-align: center;
 }
@@ -49,7 +46,7 @@ h1{
 
 .img-container{
 	width:50%;
-	flex:1;
+	flex:3;
 }
 
 .ingredients{
